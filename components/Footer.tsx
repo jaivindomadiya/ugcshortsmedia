@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-2">
             <span className="text-3xl font-black tracking-tighter text-[#111111] block mb-6">
-              UGCShorts<span className="text-primary">Media</span>.
+              UGCShorts<span className="text-primary">Media</span>
             </span>
             <p className="text-subtext max-w-sm text-lg font-medium leading-relaxed mb-10">
               AI-driven performance creatives that help D2C brands scale profitably. We blend data with design.
