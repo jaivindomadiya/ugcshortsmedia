@@ -104,6 +104,20 @@ export const Contact: React.FC = () => {
                     <span className="text-gray-300 font-medium text-lg">contact.ugcshortsmedia@gmail.com</span>
                   </div>
                 </div>
+
+                {/* Phone Numbers */}
+              <div className="flex items-start space-x-6 group">
+                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-primary shadow-inner group-hover:bg-primary group-hover:text-[#111111] transition-colors">
+                  <Phone size={28} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold mb-1">Call / WhatsApp Us</h4>
+                  <div className="flex flex-col text-gray-300 font-medium text-lg">
+                    <span>+91 73832 52829</span>
+                    <span>+91 70468 33257 </span>
+                  </div>
+                </div>
+              </div>
                 
                 <div className="flex items-start space-x-6 group">
                    <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-primary shadow-inner group-hover:bg-primary group-hover:text-[#111111] transition-colors">
