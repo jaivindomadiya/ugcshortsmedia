@@ -9,14 +9,14 @@ export const WhyChooseUs: React.FC = () => {
           
           <div className="md:w-1/3 sticky top-32">
              <div className="inline-block relative mb-6 md:mb-8">
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#111111] leading-[1.1] font-heading">
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#111111] leading-[1.1]">
                   Why Brands <br/>
                   <span className="relative z-10">Choose Us
                      <div className="absolute bottom-2 left-0 w-full h-5 bg-primary -z-10 -rotate-1 opacity-60 rounded-sm"></div>
                   </span>
                 </h2>
              </div>
-             <p className="text-xl text-subtext font-medium mb-8 md:mb-10 font-body leading-relaxed">
+             <p className="text-xl text-subtext font-medium mb-8 md:mb-10 leading-relaxed">
                 We combine human creativity with AI speed to deliver results that outperform traditional agencies.
              </p>
              <div className="w-16 h-2 bg-[#111111] rounded-full"></div>
@@ -29,8 +29,8 @@ export const WhyChooseUs: React.FC = () => {
                   <benefit.icon className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
                 </div>
                 <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-heading">{benefit.title}</h3>
-                    <p className="text-subtext group-hover:text-[#111111]/90 font-medium leading-relaxed font-body text-base md:text-lg">{benefit.description}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-[#111111] mb-2">{benefit.title}</h3>
+                    <p className="text-subtext group-hover:text-[#111111]/90 font-medium leading-relaxed text-base md:text-lg">{benefit.description}</p>
                 </div>
               </div>
             ))}

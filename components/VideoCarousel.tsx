@@ -211,10 +211,10 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, offset, isMobile, onClick 
 
         {/* Info Area */}
         <div className="px-5 py-5 bg-white flex flex-col items-center text-center relative z-10 border-t border-gray-100">
-          <span className="px-3 py-1 bg-primary text-[#111111] text-[10px] font-extrabold tracking-widest rounded-full uppercase font-heading mb-3">
+          <span className="px-3 py-1 bg-primary text-[#111111] text-[10px] font-extrabold tracking-widest rounded-full uppercase mb-3">
             {video.category}
           </span>
-          <h3 className="text-[#111111] font-bold text-lg leading-tight font-heading line-clamp-1">
+          <h3 className="text-[#111111] font-bold text-lg leading-tight line-clamp-1">
             {video.title}
           </h3>
         </div>
@@ -340,19 +340,19 @@ export const VideoCarousel: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20">
           <div className="relative">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#111111] mb-6 relative z-10 font-heading">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#111111] mb-6 relative z-10">
               Our Demo Ads
               <svg className="absolute -bottom-2 left-0 w-32 h-3 text-primary z-[-1]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.00026 6.99997C58.4239 1.94426 137.89 -2.57147 197.997 3.52841" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
               </svg>
             </h2>
-            <p className="text-xl text-subtext max-w-xl font-medium font-body">
+            <p className="text-xl text-subtext max-w-xl font-medium">
               High-performing creatives that stop the scroll and drive action.
             </p>
           </div>
           
           <div className="mt-8 md:mt-0">
-             <a href="#contact" className="group text-[#111111] font-bold text-lg flex items-center hover:text-primary transition-colors font-heading">
+             <a href="#contact" className="group text-[#111111] font-bold text-lg flex items-center hover:text-primary transition-colors">
                View Full Portfolio <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
              </a>
           </div>

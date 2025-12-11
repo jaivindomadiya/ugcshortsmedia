@@ -46,10 +46,10 @@ export const Testimonials: React.FC = () => {
     <section id="testimonials" className="py-32 bg-secondary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#111111] mb-6 font-heading">
-            Client Love
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#111111] mb-6">
+            Client's Love
           </h2>
-          <p className="text-xl text-subtext font-medium font-body">
+          <p className="text-xl text-subtext font-medium">
             Join the D2C brands that are scaling faster with our creative intelligence.
           </p>
         </div>
@@ -80,18 +80,18 @@ export const Testimonials: React.FC = () => {
                     />
                   ))}
                 </div>
-                <blockquote className="text-[#111111] text-xl font-semibold leading-relaxed mb-8 font-heading">
+                <blockquote className="text-[#111111] text-xl font-semibold leading-relaxed mb-8">
                   "{testimonial.quote}"
                 </blockquote>
               </div>
               
               <div className="flex items-center pt-6 border-t border-gray-50">
-                <div className="w-12 h-12 rounded-full bg-[#111111] flex items-center justify-center text-primary font-bold text-xl mr-4 shadow-md font-heading flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#111111] flex items-center justify-center text-primary font-bold text-xl mr-4 shadow-md flex-shrink-0">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-bold text-[#111111] text-lg font-heading">{testimonial.name}</div>
-                  <div className="text-sm text-subtext font-semibold uppercase tracking-wide font-body">{testimonial.brand}</div>
+                  <div className="font-bold text-[#111111] text-lg">{testimonial.name}</div>
+                  <div className="text-sm text-subtext font-semibold uppercase tracking-wide">{testimonial.brand}</div>
                 </div>
               </div>
             </div>

@@ -41,9 +41,9 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className={`text-2xl font-black tracking-tighter text-[#111111] transition-colors duration-300 font-heading`}>
+            <span className={`text-2xl font-black tracking-tighter text-[#111111] transition-colors duration-300`}>
               UGCShorts<span className="text-primary inline-block group-hover:-translate-y-1 transition-transform duration-200">Media</span>
-              <span className="text-primary">.</span>
+              <span className="text-primary"></span>
             </span>
           </div>
 
@@ -53,7 +53,7 @@ export const Header: React.FC = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.id)}
-                className="text-sm font-bold transition-colors font-heading uppercase tracking-wide text-[#111111]/80 hover:text-primary"
+                className="text-sm font-bold transition-colors uppercase tracking-wide text-[#111111]/80 hover:text-primary"
               >
                 {link.name}
               </button>
@@ -90,7 +90,7 @@ export const Header: React.FC = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.id)}
-                className="text-3xl font-black text-[#111111] hover:text-primary font-heading"
+                className="text-3xl font-black text-[#111111] hover:text-primary"
               >
                 {link.name}
               </button>

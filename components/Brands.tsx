@@ -43,7 +43,7 @@ export const Brands: React.FC = () => {
     <section className="py-16 bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
         <div className="text-center">
-          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-[#111111] mb-4 font-heading">
+          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-[#111111] mb-4">
             Brands We Help Grow Faster
           </h2>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>

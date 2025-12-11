@@ -89,23 +89,34 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
           {/* Badge */}
           <div className="mb-8 inline-flex items-center group cursor-default">
-            <span className="relative flex h-3 w-3 mr-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-225"></span>
-
+            <span className="relative flex h-4 w-4 mr-2">
+            
             </span>
            
           </div>
 
           {/* Headline */}
           <div className="relative mb-6">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-[#111111] leading-[1.1] font-heading drop-shadow-sm">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-[#111111] leading-[1.1] drop-shadow-sm">
               AI Creatives <br/>
               <span className="relative inline-block mt-2">
                 for D2C Growth
                 {/* Hand Drawn Underline */}
-                <svg className="absolute -bottom-3 left-0 w-full h-4 text-primary z-[-1]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.00025 2.5C45.394 6.27375 107.5 9.00001 198 2.5" stroke="currentColor" strokeWidth="5" strokeLinecap="round"/>
-                </svg>
+<svg 
+  className="absolute -bottom-3 -left-20 w-full h-4 text-yellow-400 z-[-1]"
+  viewBox="0 0 200 9"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M2.00025 2.5C45.394 6.27375 107.5 9.00001 198 2.5"
+    stroke="currentColor"
+    strokeWidth="6"
+    strokeLinecap="round"
+  />
+</svg>
+
+
               </span>
             </h1>
           </div>
@@ -167,7 +178,7 @@ export const Hero: React.FC = () => {
            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl z-20 hidden md:block animate-bounce-slight">
               <div className="flex items-center space-x-3">
                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                 <span className="font-bold font-heading text-[#111111]">ROAS +240%</span>
+                 <span className="font-bold text-[#111111]">ROAS +240%</span>
               </div>
            </div>
         </div>
