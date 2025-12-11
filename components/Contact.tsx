@@ -101,7 +101,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-bold mb-1">Email Us</h4>
-                    <span className="text-gray-300 font-medium text-lg">ugcshortsmedia@gmail.com</span>
+                    <span className="text-gray-300 font-medium text-lg">contact.ugcshortsmedia@gmail.com</span>
                   </div>
                 </div>
                 
