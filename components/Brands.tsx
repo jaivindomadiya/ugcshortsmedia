@@ -65,7 +65,7 @@ export const Brands: React.FC = () => {
               <img 
                 src={logoUrl} 
                 alt="Brand Partner" 
-                className="h-10 md:h-12 w-auto max-w-[160px] object-contain cursor-pointer select-none"
+                className="h-10 md:h-20 w-auto max-w-[260px] object-contain cursor-pointer select-none"
               />
             </div>
           ))}
