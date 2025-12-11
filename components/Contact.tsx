@@ -118,6 +118,7 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
+
                 
                 <div className="flex items-start space-x-6 group">
                    <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-primary shadow-inner group-hover:bg-primary group-hover:text-[#111111] transition-colors">
