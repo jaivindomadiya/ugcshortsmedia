@@ -1,7 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Configuration provided by user
-const supabaseUrl = 'https://usdhlthcygdqiedhjvei.supabase.co';
-const supabaseKey = 'sb_publishable_U_aQ8XBQeyR4Av2khclejw_CFFko7ds';
+const supabaseUrl = (import.meta as any).env.VITE_SUPABASE_URL;
+const supabaseKey = (import.meta as any).env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!supabaseUrl || !supabaseKey) {
+  console.warn("Supabase URL or Key is missing. Check your .env file or Vercel Environment Variables.");
+}
+
+export const supabase = createClient(
+  supabaseUrl || '', 
+  supabaseKey || ''
+);

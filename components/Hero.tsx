@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
       // Query: SELECT video_url, poster_url FROM hero_settings WHERE is_active = true LIMIT 1
       const { data, error } = await supabase
         .from('hero_settings')
-        .select<HeroSetting>('video_url, poster_url')
+        .select('video_url, poster_url')
         .eq('is_active', true)
         .limit(1)
         .single();
@@ -32,15 +32,16 @@ export const Hero: React.FC = () => {
 
       if (data) {
         console.log('Hero video fetched:', data);
+        const heroData = data as unknown as HeroSetting;
 
         // Use DB video if valid
-        if (data.video_url && data.video_url.trim() !== '') {
-          setVideoUrl(data.video_url);
+        if (heroData.video_url && heroData.video_url.trim() !== '') {
+          setVideoUrl(heroData.video_url);
         }
 
         // Poster is optional
-        if (data.poster_url && data.poster_url.trim() !== '') {
-          setPosterUrl(data.poster_url);
+        if (heroData.poster_url && heroData.poster_url.trim() !== '') {
+          setPosterUrl(heroData.poster_url);
         } else {
           setPosterUrl(undefined);
         }
@@ -165,7 +166,7 @@ export const Hero: React.FC = () => {
                   muted
                   loop
                   playsInline
-                  poster={posterUrl}  // optional
+                  poster={posterUrl || undefined}  // optional
                 >
                   <source src={videoUrl} type="video/mp4" />
                 </video>
