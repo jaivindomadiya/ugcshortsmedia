@@ -27,6 +27,12 @@ export const Contact: React.FC = () => {
     setStatus('submitting');
 
     try {
+
+       // 1) Fetch user's public IP address
+        const ipResponse = await fetch("https://api.ipify.org?format=json");
+        const ipData = await ipResponse.json();
+        const userIp = ipData?.ip ?? null;
+
       // Submit to Supabase 'contacts' table
       const { error } = await supabase
         .from('contacts')
@@ -38,6 +44,7 @@ export const Contact: React.FC = () => {
             ad_spend: formData.ad_spend,
             message: formData.message,
             created_at: new Date().toISOString(),
+            ip: userIp,    
           }
         ]);
 

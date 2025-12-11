@@ -360,7 +360,7 @@ export const VideoCarousel: React.FC = () => {
 
         {/* Carousel Container */}
         <div 
-          className="relative w-full h-[550px] md:h-[700px] flex items-center justify-center"
+          className="relative w-full h-[380px] md:h-[450px] flex items-center justify-center"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={onTouchStart}
