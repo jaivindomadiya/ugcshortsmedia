@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button } from './Button';
 import { Play } from 'lucide-react';
 import { supabase } from '../supabaseClient';
@@ -12,6 +12,8 @@ export const Hero: React.FC = () => {
   // Initial state is empty string to ensure no fallback is used if no data
   const [videoUrl, setVideoUrl] = useState<string>('');
   const [posterUrl, setPosterUrl] = useState<string | undefined>(undefined);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const fetchHeroVideo = async () => {
     try {
@@ -71,6 +73,28 @@ export const Hero: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // Trigger video load only after it comes into view
+          // And add a small delay to ensure the poster (LCP) paints first
+          setTimeout(() => {
+            setShouldLoadVideo(true);
+          }, 1500); // 1.5s delay to prioritize other assets
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -149,30 +173,46 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Right Side - Hero Video */}
-        <div className="lg:col-span-6 relative flex justify-center items-center order-1 lg:order-2 min-h-[500px]">
+        <div 
+          ref={containerRef}
+          className="lg:col-span-6 relative flex justify-center items-center order-1 lg:order-2 min-h-[500px]"
+        >
           {/* Wave background */}
           <div className="absolute inset-0 bg-primary/20 animate-wave-slower z-0 transform scale-105"></div>
           <div className="absolute inset-4 bg-primary animate-wave-slow z-0"></div>
 
           {/* Video container */}
-          <div className="relative z-10 w-[95%] h-[95%] overflow-hidden animate-wave-slow bg-black">
+          <div className="relative z-10 w-[95%] h-[95%] overflow-hidden animate-wave-slow bg-black shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 z-20 pointer-events-none"></div>
 
-            {videoUrl ? (
+            {/* 1. Poster Image (Optimized LCP) */}
+            {posterUrl && (
+              <img 
+                src={posterUrl} 
+                alt="Hero Video Poster"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${shouldLoadVideo ? 'opacity-0' : 'opacity-100'}`}
+                loading="eager" // Prioritize this image
+                fetchPriority="high"
+              />
+            )}
+
+            {/* 2. Video (Lazy Loaded) */}
+            {shouldLoadVideo && videoUrl ? (
                 <video
                   key={videoUrl} 
-                  className="w-full h-full object-cover scale-110"
+                  className="w-full h-full object-cover scale-110 animate-fade-in"
                   autoPlay
                   muted
                   loop
                   playsInline
-                  poster={posterUrl || undefined}  // optional
+                  preload="auto"
                 >
                   <source src={videoUrl} type="video/mp4" />
                 </video>
-            ) : (
-                <div className="w-full h-full bg-black"></div>
-            )}
+            ) : null}
+            
+            {/* Fallback empty state if neither poster nor video */}
+            {!posterUrl && !videoUrl && <div className="w-full h-full bg-black"></div>}
           </div>
           
            {/* Floating Accent */}
