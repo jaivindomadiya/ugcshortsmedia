@@ -5,8 +5,8 @@ import { Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
 export const Footer: React.FC = () => {
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/ugc_shorts/" },
-    { icon: Youtube, href: "https://www.youtube.com/" },
-    { icon: Linkedin, href: "https://www.linkedin.com/company/ugcshortsmedia/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BdZ7wh%2FthRnqEKvtAy2C99w%3D%3D" },
+    { icon: Youtube, href: "https://www.youtube.com/@ugcshortsmedia" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/ugcshortsmedia" },
     { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61584881488185" }
   ];
 
