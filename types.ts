@@ -19,8 +19,7 @@ export interface DemoVideo {
   id: string;
   title: string;
   category: string;
-  // thumbnailUrl removed as per database update
-  videoUrl: string; // This stores the URL to the video file in Supabase Storage
+  videoUrl: string; // This stores the URL to the video file in Firebase Storage
 }
 
 export interface Benefit {

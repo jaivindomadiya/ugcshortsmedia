@@ -8,6 +8,7 @@ import { Brands } from './components/Brands';
 import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { DataImporter } from './components/DataImporter';
 
 const App: React.FC = () => {
   // SEO
@@ -32,6 +33,7 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      <DataImporter />
     </div>
   );
 };
