@@ -304,7 +304,7 @@ export const VideoCarousel: React.FC = () => {
   };
 
   return (
-    <section id="our-work" className="py-24 md:py-32 bg-secondary relative overflow-hidden">
+    <section id="our-work" className="pt-16 md:pt-20 pb-24 md:pb-32 bg-secondary relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
 

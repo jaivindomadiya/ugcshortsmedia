@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Button } from './Button';
-import { Play } from 'lucide-react';
+import React, { useEffect, useState, useRef } from "react";
+import { Button } from "./Button";
+import { Play } from "lucide-react";
 
 export const Hero: React.FC = () => {
   // Use Cloudinary video directly
-  const videoUrl = 'https://res.cloudinary.com/dnltq0vcx/video/upload/v1771049855/ugcshortsmediademo_ijypaa.mp4';
+  const videoUrl =
+    "https://res.cloudinary.com/dnltq0vcx/video/upload/v1771049855/ugcshortsmediademo_ijypaa.mp4";
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +19,7 @@ export const Hero: React.FC = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (containerRef.current) {
@@ -29,23 +30,18 @@ export const Hero: React.FC = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white flex flex-col justify-center items-center py-20 lg:py-0">
-
       <div className="absolute top-20 left-10 w-40 h-40 bg-gray-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
       <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
         <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
           <div className="mb-8 inline-flex items-center group cursor-default">
-            <span className="relative flex h-4 w-4 mr-2">
-
-            </span>
-
+            <span className="relative flex h-4 w-4 mr-2"></span>
           </div>
 
           <div className="relative mb-6">
@@ -66,20 +62,19 @@ export const Hero: React.FC = () => {
                     strokeLinecap="round"
                   />
                 </svg>
-
-
               </span>
             </h1>
           </div>
 
           <p className="text-xl text-subtext mb-10 max-w-lg leading-relaxed font-medium">
-            High-impact AI UGC & CGI ad videos designed to boost conversions and ROAS. Stop guessing, start scaling with data-driven creatives.
+            High-impact AI UGC & CGI ad videos designed to boost conversions and
+            ROAS. Stop guessing, start scaling with data-driven creatives.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
             <Button
               size="lg"
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection("contact")}
               className="shadow-xl hover:-translate-y-1 transition-transform w-full sm:w-auto"
             >
               Book Strategy Call
@@ -88,7 +83,9 @@ export const Hero: React.FC = () => {
               variant="outline"
               size="lg"
               className="w-full sm:w-auto hover:-translate-y-1 transition-transform border-gray-200"
-              onClick={() => window.open('https://www.instagram.com/ugc_shorts/', '_blank')}
+              onClick={() =>
+                window.open("https://www.instagram.com/ugc_shorts/", "_blank")
+              }
             >
               <Play size={20} className="mr-2 fill-current" />
               View Portfolio
@@ -125,14 +122,13 @@ export const Hero: React.FC = () => {
             )}
           </div>
 
-          <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl z-20 hidden md:block animate-bounce-slight">
+          {/* <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl z-20 hidden md:block animate-bounce-slight">
             <div className="flex items-center space-x-3">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <span className="font-bold text-[#111111]">ROAS +240%</span>
             </div>
-          </div>
+          </div> */}
         </div>
-
       </div>
     </div>
   );

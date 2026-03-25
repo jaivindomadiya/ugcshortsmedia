@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { db } from '../firebaseConfig';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import { db } from "../firebaseConfig";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export const Brands: React.FC = () => {
   const [brands, setBrands] = useState<string[]>([]);
@@ -8,14 +8,14 @@ export const Brands: React.FC = () => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const q = query(collection(db, 'ugc_brands'), orderBy('id', 'asc'));
+        const q = query(collection(db, "ugc_brands"), orderBy("id", "asc"));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
           setBrands(querySnapshot.docs.map((doc) => doc.data().name));
         }
       } catch (e) {
-        console.warn('Error fetching brands', e);
+        console.warn("Error fetching brands", e);
       }
     };
     fetchBrands();
