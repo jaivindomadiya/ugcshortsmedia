@@ -4,8 +4,8 @@ import { Play } from "lucide-react";
 
 export const Hero: React.FC = () => {
   // Use Cloudinary video directly
-  const videoUrl =
-    "https://res.cloudinary.com/dnltq0vcx/video/upload/v1771049855/ugcshortsmediademo_ijypaa.mp4";
+  const videoUrl ="/videos/herosectionvid.mp4 ";
+    //  "https://res.cloudinary.com/dnltq0vcx/video/upload/v1771049855/ugcshortsmediademo_ijypaa.mp4";
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
