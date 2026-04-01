@@ -133,6 +133,149 @@
 //     </div>
 //   );
 // };
+// import React, { useEffect, useState, useRef } from "react";
+// import { Button } from "./Button";
+// import { Play } from "lucide-react";
+
+// export const Hero: React.FC = () => {
+//   const videoUrl = "/videos/herosectionvid.mp4";
+
+//   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+//   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+//   const containerRef = useRef<HTMLDivElement>(null);
+
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       (entries) => {
+//         if (entries[0].isIntersecting) {
+//           setShouldLoadVideo(true); // 🔥 removed delay
+//           observer.disconnect();
+//         }
+//       },
+//       { threshold: 0.1 }
+//     );
+
+//     if (containerRef.current) {
+//       observer.observe(containerRef.current);
+//     }
+
+//     return () => observer.disconnect();
+//   }, []);
+
+//   const scrollToSection = (id: string) => {
+//     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+//   };
+
+//   return (
+//     <div className="relative min-h-screen w-full overflow-hidden bg-white flex flex-col justify-center items-center py-20 lg:py-0">
+//       {/* Background blobs */}
+//       <div className="absolute top-20 left-10 w-40 h-40 bg-gray-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+//       <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+
+//       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+//         {/* LEFT TEXT SECTION */}
+//         <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
+          
+//           <div className="mb-8 inline-flex items-center group cursor-default">
+//             <span className="relative flex h-4 w-4 mr-2"></span>
+//           </div>
+
+//           <div className="relative mb-6">
+//             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-[#111111] leading-[1.1] drop-shadow-sm">
+//               AI Creatives <br />
+//               <span className="relative inline-block mt-2">
+//                 for D2C Growth
+//                 <svg
+//                   className="absolute -bottom-3 -left-20 w-full h-4 text-yellow-400 z-[-1]"
+//                   viewBox="0 0 200 9"
+//                   fill="none"
+//                 >
+//                   <path
+//                     d="M2.00025 2.5C45.394 6.27375 107.5 9.00001 198 2.5"
+//                     stroke="currentColor"
+//                     strokeWidth="6"
+//                     strokeLinecap="round"
+//                   />
+//                 </svg>
+//               </span>
+//             </h1>
+//           </div>
+
+//           <p className="text-xl text-subtext mb-10 max-w-lg leading-relaxed font-medium">
+//             High-impact AI UGC & CGI ad videos designed to boost conversions and
+//             ROAS. Stop guessing, start scaling with data-driven creatives.
+//           </p>
+
+//           <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+//             <Button
+//               size="lg"
+//               onClick={() => scrollToSection("contact")}
+//               className="shadow-xl hover:-translate-y-1 transition-transform w-full sm:w-auto"
+//             >
+//               Book Strategy Call
+//             </Button>
+
+//             <Button
+//               variant="outline"
+//               size="lg"
+//               className="w-full sm:w-auto hover:-translate-y-1 transition-transform border-gray-200"
+//               onClick={() =>
+//                 window.open("https://www.instagram.com/ugc_shorts/", "_blank")
+//               }
+//             >
+//               <Play size={20} className="mr-2 fill-current" />
+//               View Portfolio
+//             </Button>
+//           </div>
+//         </div>
+
+//         {/* RIGHT VIDEO SECTION */}
+//         <div
+//           ref={containerRef}
+//           className="lg:col-span-6 relative flex justify-center items-center order-1 lg:order-2 min-h-[500px]"
+//         >
+//           <div className="absolute inset-0 bg-primary/20 animate-wave-slower z-0 transform scale-105"></div>
+//           <div className="absolute inset-4 bg-primary animate-wave-slow z-0"></div>
+
+//           <div className="relative z-10 w-[95%] h-[95%] overflow-hidden animate-wave-slow shadow-2xl">
+
+//             {/* 🌟 Yellow Theme Loader */}
+//             {!isVideoLoaded && (
+//               <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-white z-20">
+                
+//                 <div className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+
+//                 <p className="text-yellow-700 text-lg font-medium tracking-wide animate-pulse">
+//                   Preparing something awesome…
+//                 </p>
+//               </div>
+//             )}
+
+//             {/* 🎬 Video */}
+//             {shouldLoadVideo && (
+//               <video
+//                 key={videoUrl}
+//                 className={`w-full h-full object-cover scale-110 transition-opacity duration-700 ${
+//                   isVideoLoaded ? "opacity-100" : "opacity-0"
+//                 }`}
+//                 autoPlay
+//                 muted
+//                 loop
+//                 playsInline
+//                 preload="metadata"
+//                 onLoadedData={() => setIsVideoLoaded(true)}
+//               >
+//                 <source src={videoUrl} type="video/mp4" />
+//               </video>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 import React, { useEffect, useState, useRef } from "react";
 import { Button } from "./Button";
 import { Play } from "lucide-react";
@@ -149,7 +292,7 @@ export const Hero: React.FC = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setShouldLoadVideo(true); // 🔥 removed delay
+          setShouldLoadVideo(true);
           observer.disconnect();
         }
       },
@@ -169,13 +312,14 @@ export const Hero: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white flex flex-col justify-center items-center py-20 lg:py-0">
+      
       {/* Background blobs */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-gray-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
       <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        {/* LEFT TEXT SECTION */}
+        {/* LEFT CONTENT */}
         <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
           
           <div className="mb-8 inline-flex items-center group cursor-default">
@@ -241,19 +385,33 @@ export const Hero: React.FC = () => {
 
           <div className="relative z-10 w-[95%] h-[95%] overflow-hidden animate-wave-slow shadow-2xl">
 
-            {/* 🌟 Yellow Theme Loader */}
+            {/* 🎬 PLAY-STYLE LOADER */}
             {!isVideoLoaded && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-white z-20">
-                
-                <div className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-yellow-50 to-white z-20">
 
-                <p className="text-yellow-700 text-lg font-medium tracking-wide animate-pulse">
-                  Preparing something awesome…
-                </p>
+                <div className="relative flex items-center justify-center">
+
+                  {/* Pulse animation */}
+                  <div className="absolute w-20 h-20 rounded-full bg-yellow-300 opacity-50 animate-ping"></div>
+
+                  {/* Button circle */}
+                  <div className="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg">
+
+                    {/* Play icon */}
+                    <svg
+                      className="w-6 h-6 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* 🎬 Video */}
+            {/* 🎥 VIDEO */}
             {shouldLoadVideo && (
               <video
                 key={videoUrl}
