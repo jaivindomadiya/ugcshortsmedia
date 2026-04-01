@@ -58,15 +58,19 @@ export const Contact: React.FC = () => {
     if (!validate()) return;
     setStatus("submitting");
 
+    console.log("[Contact Form] Submitting form data...", formData);
+
     try {
       let userIp = "";
       try {
         const ipResponse = await fetch("https://api.ipify.org?format=json");
         const ipData = await ipResponse.json();
         userIp = ipData?.ip ?? "";
-      } catch (_) {}
+      } catch (_) {
+        console.warn("[Contact Form] Could not fetch IP address, continuing without it.");
+      }
 
-      // Generate custom document ID with current date and timestamp
+      // Generate custom document ID: YYYYMMDD_HHmmss_milliseconds
       const now = new Date();
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -75,11 +79,9 @@ export const Contact: React.FC = () => {
       const minutes = String(now.getMinutes()).padStart(2, "0");
       const seconds = String(now.getSeconds()).padStart(2, "0");
       const milliseconds = String(now.getMilliseconds()).padStart(3, "0");
-
-      // Format: YYYYMMDD_HHmmss_milliseconds (e.g., 20260214_163045_123)
       const customDocId = `${year}${month}${day}_${hours}${minutes}${seconds}_${milliseconds}`;
 
-      await setDoc(doc(db, "ugc_contacts", customDocId), {
+      const payload = {
         name: formData.name,
         email: formData.email,
         brand_name: formData.brand_name,
@@ -87,8 +89,14 @@ export const Contact: React.FC = () => {
         message: formData.message,
         created_at: now.toISOString(),
         ip: userIp,
-      });
+      };
 
+      console.log("[Contact Form] Writing to Firestore — collection: ugc_contacts, docId:", customDocId);
+      console.log("[Contact Form] Payload:", payload);
+
+      await setDoc(doc(db, "ugc_contacts", customDocId), payload);
+
+      console.log("[Contact Form] ✅ Successfully saved to Firestore!");
       setStatus("success");
       setFormData({
         name: "",
@@ -97,8 +105,25 @@ export const Contact: React.FC = () => {
         ad_spend: "",
         message: "",
       });
-    } catch (error) {
-      console.error("Firebase Submission Error:", error);
+    } catch (error: unknown) {
+      // Surface the exact Firebase error code so it's easy to diagnose
+      const firebaseError = error as { code?: string; message?: string };
+      console.error("❌ [Contact Form] Firebase Submission Error:");
+      console.error("   Code   :", firebaseError?.code ?? "unknown");
+      console.error("   Message:", firebaseError?.message ?? String(error));
+      console.error("   Full error object:", error);
+
+      if (firebaseError?.code === "permission-denied") {
+        console.error(
+          "🔐 [Contact Form] FIX REQUIRED: Your Firestore security rules are blocking this write.\n" +
+          "   Go to Firebase Console → Firestore → Rules and allow writes to the 'ugc_contacts' collection.\n" +
+          "   Example rule:\n" +
+          "     match /ugc_contacts/{docId} {\n" +
+          "       allow create: if true;\n" +
+          "     }"
+        );
+      }
+
       setStatus("error");
     }
   };
@@ -217,11 +242,10 @@ export const Contact: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${
-                        errors.name
+                      className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${errors.name
                           ? "border-red-400 bg-red-50"
                           : "border-transparent focus:border-[#111111]"
-                      }`}
+                        }`}
                       placeholder="John Doe"
                     />
                     {errors.name && (
@@ -244,11 +268,10 @@ export const Contact: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${
-                        errors.email
+                      className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${errors.email
                           ? "border-red-400 bg-red-50"
                           : "border-transparent focus:border-[#111111]"
-                      }`}
+                        }`}
                       placeholder="john@company.com"
                     />
                     {errors.email && (
@@ -272,11 +295,10 @@ export const Contact: React.FC = () => {
                         name="ad_spend"
                         value={formData.ad_spend}
                         onChange={handleChange}
-                        className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${
-                          errors.ad_spend
+                        className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${errors.ad_spend
                             ? "border-red-400 bg-red-50"
                             : "border-transparent focus:border-[#111111]"
-                        }`}
+                          }`}
                         placeholder="+91 7383252829"
                       />
                       {errors.ad_spend && (
@@ -298,11 +320,10 @@ export const Contact: React.FC = () => {
                         name="brand_name"
                         value={formData.brand_name}
                         onChange={handleChange}
-                        className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${
-                          errors.brand_name
+                        className={`w-full px-6 py-4 rounded-2xl bg-secondary border-2 focus:bg-white outline-none transition-all text-[#111111] font-bold placeholder-gray-400 text-lg ${errors.brand_name
                             ? "border-red-400 bg-red-50"
                             : "border-transparent focus:border-[#111111]"
-                        }`}
+                          }`}
                         placeholder="My Brand"
                       />
                       {errors.brand_name && (
