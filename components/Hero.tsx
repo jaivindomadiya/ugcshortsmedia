@@ -287,7 +287,7 @@ export const Hero: React.FC = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
+// comment this testing
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
