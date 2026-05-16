@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: "AIzaSyALH_tl1Krmy6peRo6jVdyiNZ3egAznTSo",
@@ -15,7 +14,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// Initialize Analytics (optional, only in browser environment)
+// Initialize Analytics lazily in the browser only so a missing/incomplete
+// firebase/analytics install doesn't break the build or dev server.
 if (typeof window !== 'undefined') {
-  getAnalytics(app);
+  import('firebase/analytics')
+    .then(({ getAnalytics, isSupported }) =>
+      isSupported().then((supported) => {
+        if (supported) getAnalytics(app);
+      })
+    )
+    .catch(() => {
+      /* analytics optional */
+    });
 }

@@ -2,8 +2,25 @@ import React, { useRef, useState, useEffect } from 'react';
 import { DEMO_VIDEOS } from '../constants';
 import { Play, Pause, Volume2, VolumeX, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { DemoVideo } from '../types';
-import { db } from '../firebaseConfig';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { cloudinaryListUrl, cloudinaryVideoUrl } from '../cloudinaryConfig';
+
+// Cloudinary tag whose assets feed the landing-page hero carousel.
+const HERO_TAG = 'hero';
+
+interface CloudinaryResource {
+  public_id: string;
+  format: string;
+  version: number;
+  tags?: string[];
+  context?: { custom?: { title?: string; category?: string } };
+}
+
+const titleCase = (s: string) =>
+  s
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
 
 const getOffset = (index: number, currentIndex: number, length: number) => {
   let offset = index - currentIndex;
@@ -221,35 +238,47 @@ export const VideoCarousel: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Fetch hero videos from Cloudinary (tag = "hero"). Falls back to DEMO_VIDEOS
+  // if the request fails or returns nothing.
   useEffect(() => {
+    let cancelled = false;
     const fetchVideos = async () => {
       try {
-        const q = query(collection(db, 'ugc_demo_videos'), orderBy('id', 'asc'));
-        const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.empty) {
-          console.warn('Could not fetch videos from Firebase, using default data.');
+        const res = await fetch(cloudinaryListUrl(HERO_TAG), { cache: 'no-store' });
+        if (!res.ok) {
+          console.warn(
+            `Cloudinary hero fetch failed (${res.status}). Tag videos with "${HERO_TAG}" and enable "Resource list" in Cloudinary → Settings → Security.`
+          );
           return;
         }
+        const data = (await res.json()) as { resources?: CloudinaryResource[] };
+        const resources = data.resources || [];
+        if (!resources.length) return;
 
-        const mappedVideos = querySnapshot.docs.map((doc) => {
-          const item = doc.data();
+        const mapped: DemoVideo[] = resources.map((r) => {
+          const ctx = r.context?.custom || {};
+          const filename = r.public_id.split('/').pop() || r.public_id;
+          const category = ctx.category || (r.tags || []).find((t) => t !== HERO_TAG) || 'Featured';
           return {
-            id: String(item.id),
-            title: item.title,
-            category: item.category,
-            videoUrl: item.video_url
+            id: r.public_id,
+            title: ctx.title || titleCase(filename),
+            category: titleCase(category),
+            videoUrl: cloudinaryVideoUrl(r.public_id, r.version, r.format),
           };
         });
 
-        setVideos(mappedVideos);
-        setCurrentIndex((prev) => (prev >= mappedVideos.length ? 0 : prev));
+        if (cancelled) return;
+        setVideos(mapped);
+        setCurrentIndex((prev) => (prev >= mapped.length ? 0 : prev));
       } catch (err) {
-        console.warn('Firebase fetch error', err);
+        console.warn('Cloudinary hero fetch error', err);
       }
     };
 
     fetchVideos();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const nextSlide = () => {
